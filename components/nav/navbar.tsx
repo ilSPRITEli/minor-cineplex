@@ -23,7 +23,7 @@ export default function Navbar() {
             <Input
               type="search"
               placeholder="Search movies..."
-              className="h-10 w-64 rounded-md bg-muted pl-10 text-sm focus:outline-none"
+              className="h-10 w-64 text-black rounded-md bg-muted pl-10 text-sm focus:outline-none"
             />
           </div>
           <Link href="#" className="hidden md:block" prefetch={false}>
