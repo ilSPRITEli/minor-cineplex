@@ -34,7 +34,7 @@ export default function Navbar() {
           </Link>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Avatar>
+              <Avatar className="select-none">
                 <AvatarImage src="https://github.com/shadcn.png" />
                 <AvatarFallback>CN</AvatarFallback>
               </Avatar>
