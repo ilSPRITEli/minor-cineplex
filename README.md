@@ -57,13 +57,7 @@ Next, download the SQL file from this [link](https://www.example.com/my%20great%
   - #### Main components
     I put the main components that combine each smaller components together.
     ##### here are the list of the main components used in this app
-
-    #### `full-calendar`
-    this component combine a `Full calendar` , `DateRangePicker`, `AttendanceForm` and`RequestForm` together
-    <br>
-    #### `home and home_admin`
-    these folders contain the layout components of each page.
-- ### In `app` folder
+    
   The app folder introduces a new approach to file-based routing, allowing for more dynamic and complex routing configurations. It offers more control over route nesting, layouts, and data fetching.
 
   #### Key Features and Files in the `app` Folder
