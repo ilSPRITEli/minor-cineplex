@@ -19,7 +19,7 @@ export default function Navbar() {
         </Link>
         <div className="flex items-center gap-4">
           <div className="relative hidden md:block">
-            <MagnifyingGlassIcon className="absolute left-3 top-2.5 h-5 w-5 text-muted" />
+            <MagnifyingGlassIcon className="absolute left-3 top-2.5 h-5 w-5 text-black" />
             <Input
               type="search"
               placeholder="Search movies..."
