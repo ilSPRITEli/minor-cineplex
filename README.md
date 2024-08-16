@@ -1,36 +1,76 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# TurfmappM HR Tool
 
-## Getting Started
-
-First, run the development server:
+To install the package, run:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+$ npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## About the Database
+You need pgAdmin 4 to manage PostgreSQL.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Add the following to your .env file:
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+```properties
+  DATABASE_URL="postgresql://postgres:password@[host-name]:5432/[DB name]"
+```
 
-## Learn More
+- Replace [host-name] with your database hostname.
+- Replace [DB name] with your database name.
 
-To learn more about Next.js, take a look at the following resources:
+to create the schema run :
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+  $ prisma migrate dev --name updateblabla
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+Next, download the SQL file from this [link](https://www.example.com/my%20great%20page) and execute the script in pgAdmin 4's query tool.
 
-## Deploy on Vercel
+### Now you can run your app following this command :
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```bash
+  $ npm run dev
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## About Structure
+
+- ### In `lib` folder
+  this folder contain typescript file called **db.ts** that setting up a singleton pattern for the PrismaClient, which is used to interact with a database using the Prisma ORM. The goal is to ensure that only one instance of PrismaClient is created and used throughout the application, avoiding potential issues related to multiple instances
+  <br>
+  **How to use??**
+
+  just put following
+
+  ```typescript
+  import prisma from "@/lib/db"
+  ```
+
+  in the top of your .ts file
+
+- ### In `actions` folder
+   - The actions folder often contains functions or classes in `TypeSciprt` format that encapsulate business logic and interactions with data.
+
+   - This could include operations like creating, reading, updating, or deleting data, as well as handling authentication, authorization, or any other application-specific logic.
+
+- ### In `components` folder
+  The components folder is where you define and store reusable UI elements. Each component is responsible for rendering a specific part of the user interface and can be used throughout the application wherever that part of the UI is needed.
+  - #### Main components
+    I put the main components that combine each smaller components together.
+    ##### here are the list of the main components used in this app
+
+    #### `full-calendar`
+    this component combine a `Full calendar` , `DateRangePicker`, `AttendanceForm` and`RequestForm` together
+    <br>
+    #### `home and home_admin`
+    these folders contain the layout components of each page.
+- ### In `app` folder
+  The app folder introduces a new approach to file-based routing, allowing for more dynamic and complex routing configurations. It offers more control over route nesting, layouts, and data fetching.
+
+  #### Key Features and Files in the `app` Folder
+  #### 1. `page.tsx`
+  - Defines the main content for a particular route.
+  #### 2. `layout.tsx`
+  - Defines a layout component that wraps around your pages, allowing for consistent UI elements like headers, footers, and navigation to be shared across multiple `pages`.
+
+
+
