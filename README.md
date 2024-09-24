@@ -1,4 +1,4 @@
-# TurfmappM HR Tool
+# Minor Cineplex using NextJS
 
 To install the package, run:
 
