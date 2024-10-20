@@ -77,3 +77,7 @@
   /* 000000 - 110B0B tailwindcss */
   @apply bg-gradient-to-t from-black/50 to-transparent;
 }
+
+.pic {
+  object-position : 0% 35%;
+}

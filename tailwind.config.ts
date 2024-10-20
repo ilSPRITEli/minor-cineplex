@@ -8,7 +8,7 @@ const config = {
     './components/**/*.{ts,tsx}',
     './app/**/*.{ts,tsx}',
     './src/**/*.{ts,tsx}',
-	],
+  ],
   prefix: "",
   theme: {
     container: {
@@ -19,6 +19,9 @@ const config = {
       },
     },
     extend: {
+      fontSize: {
+        '2xs': '.625rem', // 10px
+      },
       colors: {
         minorred: '#110B0B',
         border: "hsl(var(--border))",

@@ -13,7 +13,7 @@ import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 export default function Navbar() {
   return (
     <header className="fixed w-full top-0 z-50 bg-gradient-to-b from-black/80 to-transparent text-white backdrop-blur-sm">
-      <div className="flex px-20 h-16 items-center justify-between md:px-20">
+      <div className="flex px-2 h-16 items-center justify-between md:px-20">
         <Link href="#" className="text-2xl font-bold" prefetch={false}>
           Minor Cineplex
         </Link>

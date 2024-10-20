@@ -13,8 +13,90 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+// User model for customer information
 model User {
-  id    Int     @id @default(autoincrement())
-  email String  @unique
-  name  String?
+  id            Int                     @id @default(autoincrement())
+  email         String                  @unique
+  name          String
+  password      String
+  tickets       Ticket[]
+  subscriptions MoviePassSubscription[]
+  reviews       Review[]
+  createdAt     DateTime                @default(now())
+  updatedAt     DateTime                @updatedAt
+}
+
+// Model for individual movie screenings
+model Movie {
+  id          Int         @id @default(autoincrement())
+  title       String
+  description String
+  duration    Int // Duration in minutes
+  releaseDate DateTime
+  outDate     DateTime?
+  image       String? // URL or path to the movie image
+  screenings  Screening[]
+  reviews     Review[]
+  genres      Genre[]     @relation("MovieGenres")
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+}
+
+model Genre {
+  id     Int     @id @default(autoincrement())
+  name   String  @unique
+  movies Movie[] @relation("MovieGenres")
+}
+
+// Model for movie screenings at specific times
+model Screening {
+  id             Int      @id @default(autoincrement())
+  movieId        Int
+  movie          Movie    @relation(fields: [movieId], references: [id])
+  startTime      DateTime
+  endTime        DateTime
+  availableSeats Int
+  tickets        Ticket[]
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}
+
+// Model for movie tickets associated with a screening
+model Ticket {
+  id          Int       @id @default(autoincrement())
+  screeningId Int
+  userId      Int
+  screening   Screening @relation(fields: [screeningId], references: [id])
+  user        User      @relation(fields: [userId], references: [id])
+  price       Float
+  seatNumber  String
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+// Model for Movie Pass Subscription
+model MoviePassSubscription {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  user      User     @relation(fields: [userId], references: [id])
+  planType  String // For example: "Monthly", "Annual", etc.
+  price     Float
+  startDate DateTime
+  endDate   DateTime
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// Model for movie reviews
+model Review {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  movieId   Int
+  user      User     @relation(fields: [userId], references: [id])
+  movie     Movie    @relation(fields: [movieId], references: [id])
+  rating    Int // From 1 to 5 stars
+  comment   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
