@@ -70,14 +70,14 @@
 
 .main_gradient {
   /* 000000 - 110B0B tailwindcss */
-  @apply bg-gradient-to-b from-black to-minorred;
+  @apply bg-gradient-to-bl from-black via-[#2e050a] to-[#0c0202];
 }
 
 .detail_gradient {
   /* 000000 - 110B0B tailwindcss */
-  @apply bg-gradient-to-t from-black/50 to-transparent;
+  @apply bg-gradient-to-t from-black/80 to-transparent;
 }
 
 .pic {
-  object-position : 0% 35%;
+  object-position : 50% 35%;
 }

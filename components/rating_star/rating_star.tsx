@@ -20,7 +20,7 @@ export default function RatingStar({ rating }: RatingStarProps) {
         const percentage = diff * 100;
         console.log(percentage);
 
-        return <svg className="w-5 h-5"
+        return <svg className="md:w-5 md:h-5 w-3 h-3"
         key={i}
         fill={
           i < flooredRating ? 'url(#fullgrad)' : i < rating ? `url(#halfgrad${percentage})` : '#D1D5DB50'

@@ -40,7 +40,7 @@ export default function MovieCarousel() {
       >
         <CarouselContent className="rounded-xl max-h-[400px]">
           {movies.map((movie:any) => (
-            <CarouselItem key={movie.title}>
+            <CarouselItem key={movie.title} className='rounded-xl'>
               <script>
                 {`
                   console.log('Movie:', ${JSON.stringify(movie)});
@@ -66,8 +66,8 @@ export default function MovieCarousel() {
             </CarouselItem>
           ))}
         </CarouselContent>
-        <CarouselPrevious className="absolute md:left-10 left-5 top-1/2 transform -translate-y-1/2 p-2 rounded-full"></CarouselPrevious>
-        <CarouselNext className="absolute md:right-10 right-5 top-1/2 transform -translate-y-1/2 p-2 rounded-full"></CarouselNext>
+        <CarouselPrevious className="absolute md:left-10 md:block hidden left-5 top-1/2 transform -translate-y-1/2 p-2 rounded-full"></CarouselPrevious>
+        <CarouselNext className="absolute md:right-10 md:block hidden right-5 top-1/2 transform -translate-y-1/2 p-2 rounded-full"></CarouselNext>
       </Carousel>
     </div>
   );

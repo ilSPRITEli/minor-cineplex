@@ -21,6 +21,7 @@ const config = {
     extend: {
       fontSize: {
         '2xs': '.625rem', // 10px
+        '3xs': '.75rem', // 12px
       },
       colors: {
         minorred: '#110B0B',
