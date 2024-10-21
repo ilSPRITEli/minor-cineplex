@@ -81,3 +81,7 @@
 .pic {
   object-position : 50% 35%;
 }
+
+.spic{
+  object-position : 50% 100%;
+}

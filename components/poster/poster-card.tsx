@@ -6,7 +6,7 @@ export default function PosterCard(movie:any) {
   return (
     <Card className="w-full bg-transparent border-none shadow-none">
       <CardContent className="relative overflow-hidden flex flex-col p-0 gap-2 items-start justify-center text-white w-full duration-150 bg-transparent">
-        <img className="object-cover w-full h-40 md:h-60 pic rounded-xl" alt="Star Wars" src={'https://image.tmdb.org/t/p/original' + movie.movie.image} />
+        <img className="object-cover w-full h-40 md:h-60 spic rounded-xl" alt="Star Wars" src={'https://image.tmdb.org/t/p/original' + movie.movie.image} />
         <div className='flex flex-col gap-1'>
           <p className="text-yellow-200 text-sm">
               {new Date(movie.movie.releaseDate).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' }).toUpperCase()}
