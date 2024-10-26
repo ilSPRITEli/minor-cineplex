@@ -12,8 +12,29 @@ export async function getMovieById(id: number) {
     where: {
       id,
     },
+    include: {
+      genres: true,
+      reviews: {
+        select: {
+          rating: true,
+        },
+      },
+    },
+
   });
-  return movie;
+
+  const totalRating = movie?.reviews.reduce((acc, review) => acc + review.rating, 0);
+  const averageRating: number = movie?.reviews.length ? (totalRating ?? 0) / movie.reviews.length : 0;
+  if (!movie) {
+    return null;
+  }
+
+  return {
+    ...movie,
+    genres: movie.genres,
+    averageRating,
+  };
+
 }
 
 export async function getPopularMovies() {

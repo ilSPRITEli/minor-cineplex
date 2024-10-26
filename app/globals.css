@@ -82,6 +82,14 @@
   object-position : 50% 35%;
 }
 
+.poster{
+  object-position : 60% 10%;
+}
+
 .spic{
   object-position : 50% 100%;
+}
+
+.wow{
+  @apply text-green-500;
 }
