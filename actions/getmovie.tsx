@@ -2,12 +2,12 @@
 'use server';
 import prisma from '@/lib/db';
 
-export default async function getMovie() {
+export async function getMovie() {
   const movies = await prisma.movie.findMany();
   return movies;
 }
 
-export async function getMovieById(id: number) {
+export async function getMovieById(id:number) {
   const movie = await prisma.movie.findUnique({
     where: {
       id,

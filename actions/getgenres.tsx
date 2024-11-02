@@ -1,8 +1,12 @@
 'use server';
 import prisma from '@/lib/db';
 
-export default async function getGenres() {
-  const genres = await prisma.genre.findMany();
+export async function getGenres() {
+  const genres = await prisma.genre.findMany({
+    orderBy: {
+      name: 'asc',
+    },
+  });
   return genres;
 }
 

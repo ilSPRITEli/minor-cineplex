@@ -93,3 +93,7 @@
 .wow{
   @apply text-green-500;
 }
+
+.gradeint_button{
+  @apply bg-red-900;
+}
