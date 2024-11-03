@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { Calendar, CalendarDays, CalendarRange } from "lucide-react";
+import { regNpass } from "@/actions/regNpass";
 
 // Subscription option component
 const SubscriptionOption = ({ icon: Icon, label, isSelected, onClick }) => (
@@ -38,30 +39,31 @@ const Modal = ({ onClose }) => (
 );
 
 export default function Mpass() {
-  const [selected, setSelected] = useState(null);
-  const [price, setPrice] = useState("");
+  const [planType, setSelected] = useState(null);
+  const [price, setPrice] = useState(0);
   const [showModal, setShowModal] = useState(false);
 
   const handleSelect = (option) => {
     setSelected(option);
     switch (option) {
       case "weekly":
-        setPrice("75 Baht");
+        setPrice(5);
         break;
       case "monthly":
-        setPrice("220 Baht");
+        setPrice(10);
         break;
       case "yearly":
-        setPrice("2000 Baht");
+        setPrice(100);
         break;
       default:
-        setPrice("");
     }
   };
 
-  const handleSubmit = (e) => {
+  async function handleSubmit(e: any) {
     e.preventDefault(); // Prevent the default form submission behavior
     setShowModal(true); // Show the modal when the form is submitted
+    console.log("Selected Plan Type:", planType)
+    await regNpass({ planType, price });
   };
 
   const handleCloseModal = () => {
@@ -84,26 +86,26 @@ export default function Mpass() {
                 <SubscriptionOption
                   icon={Calendar}
                   label="Weekly"
-                  isSelected={selected === "weekly"}
+                  isSelected={planType === "weekly"}
                   onClick={() => handleSelect("weekly")}
                 />
                 <SubscriptionOption
                   icon={CalendarDays}
                   label="Monthly"
-                  isSelected={selected === "monthly"}
+                  isSelected={planType === "monthly"}
                   onClick={() => handleSelect("monthly")}
                 />
                 <SubscriptionOption
                   icon={CalendarRange}
                   label="Yearly"
-                  isSelected={selected === "yearly"}
+                  isSelected={planType === "yearly"}
                   onClick={() => handleSelect("yearly")}
                 />
               </div>
             </div>
-            {price && (
+            {price !== 0 && (
               <div className="text-center text-gray-300">
-                Price: {price}
+                Price: {price} Bath
               </div>
             )}
             <Button type="submit" className="w-full bg-[#3D0000] hover:bg-[#4D0000]">

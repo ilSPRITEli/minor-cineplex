@@ -3,21 +3,18 @@ import prisma from '@/lib/db';
 
 export async function regNpass(data: any) {
 
-  let price = 0;
+//   let price = 0;
   const startDate = new Date();
   let endDate;
 
   switch (data.planType) {
     case 'weekly':
-      price = 5;
       endDate = new Date(new Date().setMonth(new Date().getMonth() + 1));
       break;
     case 'monthly':
-      price = 10;
       endDate = new Date(new Date().setMonth(new Date().getMonth() + 3));
       break;    
-    case 'annual':
-      price = 100;
+    case 'year':
       endDate = new Date(new Date().setFullYear(new Date().getFullYear() + 1));
       break;
     default:
@@ -26,9 +23,9 @@ export async function regNpass(data: any) {
 
   const result = await prisma.moviePassSubscription.create({
     data: {
-      userId: Number(data.userId),
+      userId: 2,
       planType: data.planType,
-      price,
+      price: data.price,
       startDate,
       endDate,
     },
