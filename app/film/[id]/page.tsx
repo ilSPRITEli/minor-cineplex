@@ -69,7 +69,7 @@ export default async function Page({ params }: { params: Params }) {
   return (
     <main className="main_gradient flex flex-wrap grow flex-col items-start w-full h-auto gap-5 md:px-20 md:pt-24 pt-16 md:pb-10 pb-10 px-1 text-white">
       <div className="flex flex-col md:flex-row w-fit h-fit gap-5">
-        <img className="object-cover w-full md:w-80 poster" src={'https://image.tmdb.org/t/p/original' + movie?.image ?? undefined} alt={movie?.title} />
+        <img className="object-cover w-full md:w-80 poster" src={'https://image.tmdb.org/t/p/original' + movie?.image} alt={movie?.title} />
         <div className="flex flex-col gap-5 justify-between">
           <div className="flex flex-col gap-5">
             <h1 className="md:text-2xl text-2xl font-bold ">{movie?.title}</h1>
