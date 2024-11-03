@@ -46,6 +46,11 @@ export default function Navbar() {
                 </Link>
               </DropdownMenuItem>
               <DropdownMenuItem>
+                <Link href="/npass" prefetch={false}>
+                  Npass
+                </Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem>
                 <Link href="#" prefetch={false}>
                   Logout
                 </Link>
