@@ -123,7 +123,7 @@ export default function BuyTicket({ params }: { params: Params }) {
   const handleBuyTicket = async (e:any) => {
     e.preventDefault()
     try{
-        const result = await buyTicket({userId:session?.user?.id, screeningId:screening.id, price:price, seatNumber:selectedSeats})
+        const result = await buyTicket({userId:session?.user?.id ?? 0, screeningId:screening.id, price:price, seatNumber:selectedSeats})
         if (result?.id) {
           alert("Ticket bought successfully")
           router.push('/profile')

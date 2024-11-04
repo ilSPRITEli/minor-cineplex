@@ -2,7 +2,15 @@
 
 import prisma from '@/lib/db';
 
-export async function buyTicket(data: any) {
+interface TicketData {
+  userId: number;
+  screeningId: number;
+  seatNumber: string;
+  price: number;
+  [key: string]: any;
+}
+
+export async function buyTicket(data: TicketData) {
   try {
     const { userId, screeningId, ...ticketData } = data;
 
