@@ -161,8 +161,8 @@ export default function Page({ params }: { params: Params }) {
               </CardHeader>
               <CardContent>
                 <div className="flex flex-col gap-2">
-                  <p className="text-white text-xs">Start Time:
-                    <Button className="text-black bg-amber-300 hover:bg-amber-400 ml-1 duration-300">
+                  <p className="text-white text-xs">Start Time :
+                    <Button className="text-black bg-white hover:bg-white/80 h-fit py-1 ml-1 duration-300">
                       {screening.startTime.getHours()}:{screening.startTime.getMinutes()}
                     </Button>
                   </p>
