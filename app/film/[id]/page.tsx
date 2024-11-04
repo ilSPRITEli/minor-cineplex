@@ -1,6 +1,8 @@
+'use client';
 import { getMovieById } from "@/actions/getmovie";
 import RatingStar from "@/components/rating_star/rating_star";
 import React from "react";
+import { useState, useEffect } from "react";
 // import clock icon
 import { ClockIcon } from '@heroicons/react/24/outline';
 import { Button } from "@/components/ui/button";
@@ -20,16 +22,39 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+import SkeletonLoader from "@/app/film/[id]/filmskeleton";
 
 interface Params {
   id: string;
 }
 
-export default async function Page({ params }: { params: Params }) {
+export default function Page({ params }: { params: Params }) {
 
-  const movie = await getMovieById(Number(params.id));
+  interface Movie {
+    genres: { id: number; name: string; }[];
+    averageRating: number;
+    reviews: { rating: number; }[];
+    id: number;
+    title: string;
+    description: string;
+    duration: number;
+    releaseDate: Date;
+    outDate: Date | null;
+    image: string | null;
+    createdAt: Date;
+    updatedAt: Date;
+    screenings: { id: number; movieId: number; startTime: Date; endTime: Date; availableSeats: number; createdAt: Date; updatedAt: Date; }[];
+  }
+
+  const [movie, setMovie] = useState<Movie | null>(null);
+
+  useEffect(() => {
+    async function fetchMovie() {
+      const movieData = await getMovieById(Number(params.id));
+      setMovie(movieData);
+    }
+    fetchMovie();
+  }, [params.id]);
 
   const cast = [
     {
@@ -41,30 +66,34 @@ export default async function Page({ params }: { params: Params }) {
       image: '/actor.jpg'
     },
     {
-      name: 'John Doe',
+      name: 'Walter White',
       image: '/actor.jpg'
     },
     {
-      name: 'Jane Doe',
+      name: 'Leonardo DiCaprio',
       image: '/actor.jpg'
     },
     {
-      name: 'John Doe',
+      name: 'Tom Cruise',
       image: '/actor.jpg'
     },
     {
-      name: 'John Doe',
+      name: 'Robert Downey Jr.',
       image: '/actor.jpg'
     },
     {
-      name: 'John Doe',
+      name: 'Chris Evans',
       image: '/actor.jpg'
     },
     {
-      name: 'John Doe',
+      name: 'Chris Hemsworth',
       image: '/actor.jpg'
     },
   ]
+
+  if (!movie) {
+    return <SkeletonLoader />;
+  }
 
   return (
     <main className="main_gradient flex flex-wrap grow flex-col items-start w-full h-auto gap-5 md:px-20 md:pt-24 pt-16 md:pb-10 pb-10 px-1 text-white">
@@ -85,32 +114,65 @@ export default async function Page({ params }: { params: Params }) {
             </div>
             <p className="text-xs w-3/4">{movie?.description}</p>
           </div>
-          <Button className="bg-amber-400 text-black md:w-1/2 hover:bg-amber-800">Watch Now</Button>
+            <Button
+            className="bg-amber-400 text-black md:w-1/2 hover:bg-amber-800"
+            onClick={() => {
+              const tabsTrigger = document.querySelector('[value="screens"]') as HTMLElement;
+              if (tabsTrigger) {
+              tabsTrigger.click();
+              }
+            }}
+            >
+            Watch Now
+            </Button>
         </div>
       </div>
-      <Tabs defaultValue="overview" className="w-1/2 rounded-none">
-      <TabsList className="grid w-fit grid-cols-2 rounded-none bg-transparent">
-        <TabsTrigger className="w-fit px-5 text-base data-[state=active]:text-red-400 data-[state=active]:bg-transparent text-white/50" value="overview">Overview</TabsTrigger>
-        <TabsTrigger className="-fit px-5 text-base data-[state=active]:text-red-400 data-[state=active]:bg-transparent text-white/50" value="screens">Screens</TabsTrigger>
-      </TabsList>
-      <TabsContent value="overview">
-        {/* show cast */}
-        <Card className="w-full bg-transparent border-none shadow-none">
-          <CardHeader>
-            <CardTitle className="text-white">Cast</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="grid grid-cols-3 md:grid-cols-8 gap-4">
-              {cast.map((cast: any) => (
-                <div key={cast.name} className="flex flex-col gap-2">
-                  <img className="object-cover w-24 h-24 md:w-full md:h-full aspect-square rounded-xl" src={cast.image} alt={cast.name} />
-                  <p className="text-white text-xs">{cast.name}</p>
+      <Tabs defaultValue="overview" className="md:w-1/2 w-full rounded-none">
+        <TabsList className="grid w-fit grid-cols-2 rounded-none bg-transparent">
+          <TabsTrigger className="w-fit px-5 text-base data-[state=active]:text-red-400 data-[state=active]:bg-transparent text-white/50" value="overview">Overview</TabsTrigger>
+          <TabsTrigger className="-fit px-5 text-base data-[state=active]:text-red-400 data-[state=active]:bg-transparent text-white/50" value="screens">Screens</TabsTrigger>
+        </TabsList>
+        <TabsContent value="overview" className="w-full">
+          {/* show cast */}
+          <Card className="w-full bg-transparent border-none shadow-none">
+            <CardHeader>
+              <CardTitle className="text-white">Cast</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="grid grid-cols-3 md:grid-cols-8 gap-4">
+                {cast.map((cast: any) => (
+                  <div key={cast.name} className="flex flex-col gap-2 h-fit">
+                    <img className="object-cover w-24 h-24 md:w-full md:h-full aspect-square rounded-xl" src={cast.image} alt={cast.name} />
+                    <p className="text-white text-xs">{cast.name}</p>
+                  </div>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+        </TabsContent>
+        <TabsContent value="screens" className="w-full flex flex-col md:flex-row gap-5">
+          {/* display movie screens */}
+            {movie.screenings
+            .sort((a, b) => a.id - b.id)
+            .map((screening: any) => (
+              <Card key={screening.id} className="w-full bg-rose-900/20 border-none shadow-none">
+              <CardHeader>
+                <CardTitle className="text-white">Screen {screening.id}</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="flex flex-col gap-2">
+                <p className="text-white text-xs">Start Time: <Button>
+              {screening.startTime.getHours()}:{screening.startTime.getMinutes()}
+              </Button></p>
+                <p className="text-white text-xs">Available Seats: {screening.availableSeats}</p>
                 </div>
-              ))}
-            </div>
-          </CardContent>
-        </Card>
-      </TabsContent>
+              </CardContent>
+              <CardFooter>
+                <Button className="bg-amber-400 text-black hover:bg-amber-800">Book Now</Button>
+              </CardFooter>
+              </Card>
+            ))}
+        </TabsContent>
       </Tabs>
     </main>
   );

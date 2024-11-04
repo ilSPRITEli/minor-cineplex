@@ -20,12 +20,13 @@ export async function getMovieById(id:number) {
           rating: true,
         },
       },
+      screenings: true,
     },
 
   });
 
   const totalRating = movie?.reviews.reduce((acc, review) => acc + review.rating, 0);
-  const averageRating: number = movie?.reviews.length ? (totalRating ?? 0) / movie.reviews.length : 0;
+  const averageRating: number = movie?.reviews.length ? (totalRating ?? 0) / movie.reviews.length : 1;
   if (!movie) {
     return null;
   }
@@ -34,6 +35,7 @@ export async function getMovieById(id:number) {
     ...movie,
     genres: movie.genres,
     averageRating,
+    screenings: movie.screenings,
   };
 
 }

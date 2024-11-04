@@ -34,9 +34,6 @@ export default function Navbar() {
             />
           </div>
           <Link href="#" className="hidden md:block" prefetch={false}>
-            Cinema
-          </Link>
-          <Link href="#" className="hidden md:block" prefetch={false}>
             Movie
           </Link>
           {session ? (

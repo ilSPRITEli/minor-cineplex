@@ -5,6 +5,7 @@ import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious
 import Autoplay from 'embla-carousel-autoplay';
 import { getPopularMovies } from '@/actions/getmovie';
 import RatingStar from '@/components/rating_star/rating_star';
+import MovieCarouselSkeleton from '@/components/movie_carousel/movie-carousel-skeleton';
 
 export default function MovieCarousel() {
   // create movie dict
@@ -23,8 +24,9 @@ export default function MovieCarousel() {
     fetchMovies();
   }, []);
 
-
-
+  if (!movies.length) {
+    return <MovieCarouselSkeleton />;
+  }
   // create a carousel
   return (
     <div className="rounded-xl">
