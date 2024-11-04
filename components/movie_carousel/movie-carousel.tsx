@@ -16,9 +16,7 @@ export default function MovieCarousel() {
       try {
         const fetchedMovies = await getPopularMovies();
         setMovies(fetchedMovies);
-        console.log('Fetched movies:', fetchedMovies);
       } catch (error) {
-        console.error('Error fetching movies:', error);
       }
     };
 
@@ -41,11 +39,6 @@ export default function MovieCarousel() {
         <CarouselContent className="rounded-xl max-h-[400px]">
           {movies.map((movie:any) => (
             <CarouselItem key={movie.title} className='rounded-xl'>
-              <script>
-                {`
-                  console.log('Movie:', ${JSON.stringify(movie)});
-                `}
-              </script>
               <div className="relative flex h-[400px] overflow-hidden rounded-lg">
                 <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent z-10"></div>
                 <div className="absolute  md:w-1/2 md:px-10 px-8 py-5 md:py-0 bottom-5 text-white z-20 flex flex-col space-y-2">
