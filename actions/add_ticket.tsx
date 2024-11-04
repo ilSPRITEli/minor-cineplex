@@ -68,6 +68,14 @@ export async function buyTicket(data: any) {
       },
     });
 
+    // Decrease available seats
+    await prisma.screening.update({
+      where: { id: screeningId },
+      data: {
+        availableSeats: screening.availableSeats - 1,
+      },
+    });
+
     return ticket;
   } catch (error) {
     console.error('Error buying ticket:', error);
