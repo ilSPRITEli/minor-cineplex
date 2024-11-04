@@ -214,7 +214,7 @@ export default function BuyTicket({ params }: { params: Params }) {
 
         {/* Summary Card */}
         <div className="flex flex-col w-3/4 h-fit gap-5">
-          <Image className="object-cover w-full md:w-3/4 poster" src={'https://image.tmdb.org/t/p/original' + screening?.movie?.image ?? undefined} alt={screening?.movie?.title} />
+          <img className="object-cover w-full md:w-3/4 poster" src={'https://image.tmdb.org/t/p/original' + screening?.movie?.image ?? undefined} alt={screening?.movie?.title} />
           <div className="flex flex-col gap-5 justify-between">
             <div className="flex flex-col gap-2">
               <h1 className="md:text-2xl text-2xl font-bold ">{screening?.movie?.title}</h1>

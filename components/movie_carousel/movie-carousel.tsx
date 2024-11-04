@@ -57,7 +57,7 @@ export default function MovieCarousel() {
 
                 </div>
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent z-10"></div>
-                <Image className="object-cover w-full rounded-xl pic" alt="Star Wars" src={'https://image.tmdb.org/t/p/original' + movie.image}  />
+                <img className="object-cover w-full rounded-xl pic" alt="Star Wars" src={'https://image.tmdb.org/t/p/original' + movie.image}  />
               </div>
             </CarouselItem>
           ))}
