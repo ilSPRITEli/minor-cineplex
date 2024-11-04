@@ -1,6 +1,6 @@
 'use client'
 import Link from 'next/link';
-import { MagnifyingGlassIcon } from '@heroicons/react/20/solid';
+import { MagnifyingGlassIcon, SparklesIcon } from '@heroicons/react/20/solid';
 import { Input } from '@/components/ui/input';
 import {
   DropdownMenu,
@@ -42,7 +42,15 @@ export default function Navbar() {
           {session ? (
             <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button className='font-bold p-4 text-lg'>{session?.user?.name}</Button>
+              {session?.user?.isSubscripted === false ? (
+                <Button className='font-bold p-4 text-lg'>{session?.user?.name}</Button>
+              ) : (
+                <Button className='font-bold p-4 text-lg bg-amber-400 text-amber-800 gap-1'>
+                  {session?.user?.name}
+                  <SparklesIcon className='h-4 w-4' />
+                </Button>
+              )
+                }
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
               <DropdownMenuItem>
@@ -50,6 +58,17 @@ export default function Navbar() {
                   Account
                 </Link>
               </DropdownMenuItem>
+
+                {session?.user?.isSubscripted === false ? (
+                  <DropdownMenuItem>
+                    <Link href="/m_pass" prefetch={false}>
+                      Npass
+                    </Link>
+                  </DropdownMenuItem>
+                ) : (
+                  <> </>
+                )}
+
               <DropdownMenuItem>
                 <Link href='/login' prefetch={false}>
                   {session ? (

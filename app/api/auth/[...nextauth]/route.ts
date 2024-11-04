@@ -64,7 +64,7 @@ export const authOptions = {
     jwt: async ({ token, user }: { token: any, user?: any }) => {
       if (user) {
         token.id = user.id
-        token.isSubscripted = user.isSubscripted
+        token.isSubscripted = user.isSubscriped
       }
       return token
     },

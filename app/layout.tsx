@@ -5,6 +5,16 @@ import React from 'react';
 import { Footer } from '@/components/footer/footer';
 import SessionProvider from '@/components/SessionProvider';
 import { getServerSession } from 'next-auth';
+import { DefaultSession } from 'next-auth';
+
+declare module 'next-auth' {
+  interface Session {
+    user: {
+      isSubscripted?: boolean,
+      id?: number,
+    } & DefaultSession["user"];
+  }
+}
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const session = await getServerSession();

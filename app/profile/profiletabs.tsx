@@ -21,8 +21,13 @@ export default function ProfileTabs() {
                   <AvatarFallback>JD</AvatarFallback>
                 </Avatar>
               </div>
+
               <div className="max-w-2xl mx-auto grid gap-6">
                 <div className="grid gap-4 md:grid-cols-2">
+                  <div className='md:col-span-2'>
+                    <label className='text-white text-xl'>HELLO, <strong>{session?.user?.name}</strong>!!!</label>
+                    <br></br>
+                  </div>
                   <div className="space-y-2">
                     <label className="text-sm text-white">Email</label>
                     <Input
@@ -40,7 +45,7 @@ export default function ProfileTabs() {
                     />
                   </div>
                   <div className="space-y-2">
-                    <label className="text-sm text-white">สถานะ</label>
+                    <label className="text-sm text-white">Membership</label>
                     <div className="flex items-center h-10">
                       {session?.user?.isSubscripted ? (
                             <Badge variant="default" className="bg-amber-400 text-black">
@@ -48,7 +53,7 @@ export default function ProfileTabs() {
                             </Badge>
                           ) : (
                             <Badge variant="secondary" className="bg-white">
-                              MEMBER
+                              FREE
                             </Badge>
                           )}
                     </div>
