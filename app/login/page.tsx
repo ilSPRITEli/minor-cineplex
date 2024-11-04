@@ -23,12 +23,12 @@ export default function SignIn() {
       })
 
       if (result?.error) {
-        console.error(result.error)
+        alert(result?.error)
       } else {
         router.push('/profile')
       }
     } catch (error) {
-      console.log('error', error)
+      alert(error)
     }
   }
 
