@@ -131,7 +131,7 @@ export default function BuyTicket({ params }: { params: Params }) {
         }
     }
     catch (error) {
-      alert(error);
+      alert(String(error));
     }
   }
 
