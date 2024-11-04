@@ -11,6 +11,7 @@ import {
 import { Button } from '@/components/ui/button';
 import { signOut, useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
+import Image from 'next/image'
 
 
 
@@ -23,7 +24,7 @@ export default function Navbar() {
     <header className="fixed w-full top-0 z-50 bg-gradient-to-b from-black/80 to-transparent text-white backdrop-blur-sm">
       <div className="flex px-2 h-16 items-center justify-between md:px-20">
         <Link href="/" className="text-2xl font-bold" prefetch={false}>
-          <img src="/logo.png" className='w-52 md:w-80' alt="logo" />
+          <Image src="/logo.png" className='w-52 md:w-80' alt="logo" />
         </Link>
         <div className="flex items-center gap-4">
           <div className="relative hidden md:block">

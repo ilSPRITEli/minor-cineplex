@@ -1,6 +1,7 @@
 'use client';
 import { getMovieById } from "@/actions/getmovie";
 import RatingStar from "@/components/rating_star/rating_star";
+import Image from 'next/image';
 import React from "react";
 import { useState, useEffect } from "react";
 // import clock icon
@@ -106,7 +107,7 @@ export default function Page({ params }: { params: Params }) {
   return (
     <main className="main_gradient flex flex-wrap grow flex-col items-start w-full h-auto gap-5 md:px-20 md:pt-24 pt-16 md:pb-10 pb-10 px-1 text-white">
       <div className="flex flex-col md:flex-row w-fit h-fit gap-5">
-        <img className="object-cover w-full md:w-80 poster" src={'https://image.tmdb.org/t/p/original' + movie?.image ?? undefined} alt={movie?.title} />
+        <Image className="object-cover w-full md:w-80 poster" src={'https://image.tmdb.org/t/p/original' + movie?.image ?? undefined} alt={movie?.title} />
         <div className="flex flex-col gap-5 justify-between">
           <div className="flex flex-col gap-5">
             <h1 className="md:text-2xl text-2xl font-bold ">{movie?.title}</h1>
@@ -145,7 +146,7 @@ export default function Page({ params }: { params: Params }) {
               <div className="grid grid-cols-3 md:grid-cols-8 gap-4">
                 {cast.map((cast: any) => (
                   <div key={cast.name} className="flex flex-col gap-2 h-fit">
-                    <img className="object-cover w-24 h-24 md:w-full md:h-full aspect-square rounded-xl" src={cast.image} alt={cast.name} />
+                    <Image className="object-cover w-24 h-24 md:w-full md:h-full aspect-square rounded-xl" src={cast.image} alt={cast.name} />
                     <p className="text-white text-xs">{cast.name}</p>
                   </div>
                 ))}
