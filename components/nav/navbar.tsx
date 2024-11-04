@@ -79,7 +79,7 @@ export default function Navbar() {
             </DropdownMenuContent>
           </DropdownMenu>
                   ) : (
-                    <Button onClick={() => router.push('/profile')}>Sign in</Button>
+                    <Button onClick={() => router.push('/profile')}>Sign ins</Button>
           )}
         </div>
       </div>
