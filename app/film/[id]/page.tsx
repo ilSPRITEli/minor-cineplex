@@ -157,14 +157,16 @@ export default function Page({ params }: { params: Params }) {
             .map((screening: any) => (
               <Card key={screening.id} className="w-full bg-rose-900/20 border-none shadow-none">
               <CardHeader>
-                <CardTitle className="text-white">Screen {screening.id}</CardTitle>
+                <CardTitle className="text-white text-lg">{screening.startTime.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })}</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="flex flex-col gap-2">
-                <p className="text-white text-xs">Start Time: <Button>
-              {screening.startTime.getHours()}:{screening.startTime.getMinutes()}
-              </Button></p>
-                <p className="text-white text-xs">Available Seats: {screening.availableSeats}</p>
+                  <p className="text-white text-xs">Start Time:
+                    <Button className="text-black bg-amber-300 hover:bg-amber-400 ml-1 duration-300">
+                      {screening.startTime.getHours()}:{screening.startTime.getMinutes()}
+                    </Button>
+                  </p>
+                  <p className="text-white text-xs">Available Seats: {screening.availableSeats}</p>
                 </div>
               </CardContent>
               <CardFooter>
