@@ -5,15 +5,14 @@ import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import { useSession } from 'next-auth/react'
 import { ClockIcon } from '@heroicons/react/24/outline'
-import { getScreenById } from '@/actions/getScreen'
+import { getScreenById} from '@/actions/getScreen'
 import { buyTicket } from '@/actions/add_ticket'
 import { useRouter } from 'next/navigation'
-import Image from 'next/image'
+// import Image from 'next/image'
 
 interface Params {
   screen_id: string;
 }
-
 
 export default function BuyTicket({ params }: { params: Params }) {
 
