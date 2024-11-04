@@ -1,5 +1,6 @@
+'use client'
 import Link from 'next/link';
-import { MagnifyingGlassIcon } from '@heroicons/react/20/solid';
+import { MagnifyingGlassIcon, SparklesIcon } from '@heroicons/react/20/solid';
 import { Input } from '@/components/ui/input';
 import {
   DropdownMenu,
@@ -8,13 +9,20 @@ import {
   DropdownMenuItem,
 } from '@/components/ui/dropdown-menu';
 import { Button } from '@/components/ui/button';
-import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
+import { signOut, useSession } from 'next-auth/react'
+import { useRouter } from 'next/navigation'
+
+
 
 export default function Navbar() {
+
+  const router = useRouter()
+  const { data: session, status } = useSession()
+
   return (
     <header className="fixed w-full top-0 z-50 bg-gradient-to-b from-black/80 to-transparent text-white backdrop-blur-sm">
       <div className="flex px-2 h-16 items-center justify-between md:px-20">
-        <Link href="#" className="text-2xl font-bold" prefetch={false}>
+        <Link href="/" className="text-2xl font-bold" prefetch={false}>
           <img src="/logo.png" className='w-52 md:w-80' alt="logo" />
         </Link>
         <div className="flex items-center gap-4">
@@ -27,31 +35,52 @@ export default function Navbar() {
             />
           </div>
           <Link href="#" className="hidden md:block" prefetch={false}>
-            Cinema
-          </Link>
-          <Link href="#" className="hidden md:block" prefetch={false}>
             Movie
           </Link>
-          <DropdownMenu>
+          {session ? (
+            <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Avatar className="select-none">
-                <AvatarImage src="https://github.com/shadcn.png" />
-                <AvatarFallback>CN</AvatarFallback>
-              </Avatar>
+              {session?.user?.isSubscripted === false ? (
+                <Button className='font-bold p-4 text-lg'>{session?.user?.name}</Button>
+              ) : (
+                <Button className='font-bold p-4 text-lg bg-amber-400 text-amber-800 gap-1'>
+                  {session?.user?.name}
+                  <SparklesIcon className='h-4 w-4' />
+                </Button>
+              )
+                }
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
               <DropdownMenuItem>
-                <Link href="#" prefetch={false}>
+                <Link href="/profile" prefetch={false}>
                   Account
                 </Link>
               </DropdownMenuItem>
+
+                {session?.user?.isSubscripted === false ? (
+                  <DropdownMenuItem>
+                    <Link href="/m_pass" prefetch={false}>
+                      Npass
+                    </Link>
+                  </DropdownMenuItem>
+                ) : (
+                  <> </>
+                )}
+
               <DropdownMenuItem>
-                <Link href="#" prefetch={false}>
-                  Logout
+                <Link href='/login' prefetch={false}>
+                  {session ? (
+                        <Button onClick={()=>signOut()}>Logout</Button>
+                      ) : (
+                        <></>
+                  )}
                 </Link>
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
+                  ) : (
+                    <Button onClick={() => router.push('/profile')}>Sign in</Button>
+          )}
         </div>
       </div>
     </header>

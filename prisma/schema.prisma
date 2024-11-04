@@ -24,7 +24,6 @@ model User {
   subscriptions MoviePassSubscription[]
   reviews       Review[]
   createdAt     DateTime                @default(now())
-  updatedAt     DateTime                @updatedAt
 }
 
 // Model for individual movie screenings
@@ -80,7 +79,7 @@ model MoviePassSubscription {
   id        Int      @id @default(autoincrement())
   userId    Int
   user      User     @relation(fields: [userId], references: [id])
-  planType  String // For example: "Monthly", "Annual", etc.
+  planType  String // Monthly, Quarterly, Yearly
   price     Float
   startDate DateTime
   endDate   DateTime

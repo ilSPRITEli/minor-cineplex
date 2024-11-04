@@ -18,7 +18,6 @@ export default function RatingStar({ rating }: RatingStarProps) {
 
         const diff = Number(formattedRating) - i;
         const percentage = diff * 100;
-        console.log(percentage);
 
         return <svg className="md:w-5 md:h-5 w-3 h-3"
         key={i}

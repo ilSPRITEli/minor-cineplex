@@ -95,5 +95,5 @@
 }
 
 .gradeint_button{
-  @apply bg-red-900;
+  @apply bg-red-900 text-white;
 }

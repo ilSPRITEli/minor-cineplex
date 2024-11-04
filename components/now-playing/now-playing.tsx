@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import PosterCard from '@/components/poster/poster-card';
 import { getPopularMovies } from '@/actions/getmovie';
+import SmallPosterSkeleton from '@/components/now-playing/now-playing-skeleton';
 
 export default function SmallPoster() {
   const [popularMovies, setPopularMovies] = useState<any[]>([]);
@@ -13,6 +14,10 @@ export default function SmallPoster() {
     }
     fetchPopularMovies();
   }, []);
+
+  if (!popularMovies.length) {
+    return <SmallPosterSkeleton />;
+  }
 
   return (
     <div className="flex justify-center flex-col w-full gap-5">
