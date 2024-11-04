@@ -43,7 +43,7 @@ export default function Navbar() {
               {session?.user?.isSubscripted === false ? (
                 <Button className='font-bold p-4 text-lg'>{session?.user?.name}</Button>
               ) : (
-                <Button className='font-bold p-4 text-lg bg-amber-400 text-amber-800 gap-1'>
+                <Button className='font-bold p-4 text-lg bg-amber-400 hover:bg-amber-500 duration-300 text-amber-800 gap-1'>
                   {session?.user?.name}
                   <SparklesIcon className='h-4 w-4' />
                 </Button>
