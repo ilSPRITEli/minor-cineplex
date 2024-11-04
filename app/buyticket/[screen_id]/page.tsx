@@ -31,7 +31,7 @@ export default function BuyTicket({ params }: { params: Params }) {
     async function fetchScreen() {
       const screenData = await getScreenById(Number(params.screen_id));
       setScreening(screenData);
-      console.log(screenData)
+      // console.log(screenData)
     }
     fetchScreen();
   }, [params.screen_id]);
@@ -127,7 +127,7 @@ export default function BuyTicket({ params }: { params: Params }) {
         if (result?.id) {
           alert("Ticket bought successfully")
           router.push('/profile')
-          console.log(result)
+          // console.log(result)
         }
     }
     catch (error) {
