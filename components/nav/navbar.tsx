@@ -37,7 +37,7 @@ export default function Navbar() {
           <Link href="#" className="hidden md:block" prefetch={false}>
             Movie
           </Link>
-          {session?.user.isSubscripted === false ? (
+          {session ? (
             <DropdownMenu>
             <DropdownMenuTrigger asChild>
               {session?.user?.isSubscripted === false ? (
