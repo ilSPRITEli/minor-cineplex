@@ -18,6 +18,7 @@ export default function Navbar() {
 
   const router = useRouter()
   const { data: session, status } = useSession()
+
   return (
     <header className="fixed w-full top-0 z-50 bg-gradient-to-b from-black/80 to-transparent text-white backdrop-blur-sm">
       <div className="flex px-2 h-16 items-center justify-between md:px-20">

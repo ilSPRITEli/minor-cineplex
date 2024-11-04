@@ -23,6 +23,7 @@ import {
 } from "@/components/ui/card"
 
 import SkeletonLoader from "@/app/film/[id]/filmskeleton";
+import { useRouter } from "next/navigation";
 
 interface Params {
   id: string;
@@ -47,6 +48,8 @@ export default function Page({ params }: { params: Params }) {
   }
 
   const [movie, setMovie] = useState<Movie | null>(null);
+
+  const router = useRouter();
 
   useEffect(() => {
     async function fetchMovie() {
@@ -91,8 +94,13 @@ export default function Page({ params }: { params: Params }) {
     },
   ]
 
+  const[tab, setTab] = useState('overview');
+
   if (!movie) {
     return <SkeletonLoader />;
+  }
+  const onWatchnow = (tab: string) => {
+    setTab(tab);
   }
 
   return (
@@ -116,21 +124,16 @@ export default function Page({ params }: { params: Params }) {
           </div>
             <Button
             className="bg-amber-400 text-black md:w-1/2 hover:bg-amber-800"
-            onClick={() => {
-              const tabsTrigger = document.querySelector('[value="screens"]') as HTMLElement;
-              if (tabsTrigger) {
-              tabsTrigger.click();
-              }
-            }}
+            onClick={() => onWatchnow('screens')}
             >
             Watch Now
             </Button>
         </div>
       </div>
-      <Tabs defaultValue="overview" className="md:w-1/2 w-full rounded-none">
+      <Tabs value={tab} onValueChange={onWatchnow} className="md:w-1/2 w-full rounded-none">
         <TabsList className="grid w-fit grid-cols-2 rounded-none bg-transparent">
           <TabsTrigger className="w-fit px-5 text-base data-[state=active]:text-red-400 data-[state=active]:bg-transparent text-white/50" value="overview">Overview</TabsTrigger>
-          <TabsTrigger className="-fit px-5 text-base data-[state=active]:text-red-400 data-[state=active]:bg-transparent text-white/50" value="screens">Screens</TabsTrigger>
+          <TabsTrigger className="-fit px-5 text-base data-[state=active]:text-red-400 data-[state=active]:bg-transparent text-white/50" value="screens" id="screens">Screens</TabsTrigger>
         </TabsList>
         <TabsContent value="overview" className="w-full">
           {/* show cast */}
@@ -170,7 +173,11 @@ export default function Page({ params }: { params: Params }) {
                 </div>
               </CardContent>
               <CardFooter>
-                <Button className="bg-amber-400 text-black hover:bg-amber-800">Book Now</Button>
+                <Button
+                className="bg-amber-400 text-black hover:bg-amber-800"
+                onClick={()=>router.push(`/buyticket/${screening?.id}`)}>
+                  Book Now
+                </Button>
               </CardFooter>
               </Card>
             ))}

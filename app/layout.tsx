@@ -18,6 +18,7 @@ declare module 'next-auth' {
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const session = await getServerSession();
+  console.log("layout session", session);
   return (
       <html lang="en">
         <body className={`${krub.className} antialiased`}>

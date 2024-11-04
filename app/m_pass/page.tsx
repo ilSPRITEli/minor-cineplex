@@ -51,6 +51,10 @@ export default function Mpass() {
   const { data: session, status } = useSession()
   const router = useRouter()
 
+  if (status === 'unauthenticated') {
+    router.push('/login');
+  }
+
   const handleSelect = (option: string) => {
     setSelected(option);
     switch (option) {

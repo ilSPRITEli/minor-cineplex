@@ -10,6 +10,8 @@ import { DefaultSession } from "next-auth";
 
 
 import { useRouter } from 'next/navigation'
+import { Ticket } from "lucide-react";
+import TicketsTabs from "@/app/profile/ticketstabs";
 
 
 export default function Component() {
@@ -28,6 +30,9 @@ export default function Component() {
         </TabsList>
         <TabsContent value="profile">
           <ProfileTabs/>
+        </TabsContent>
+        <TabsContent value="tickets">
+          <TicketsTabs/>
         </TabsContent>
         </Tabs>
       </div>
