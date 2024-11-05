@@ -132,6 +132,7 @@ export default function BuyTicket({ params }: { params: Params }) {
     }
     catch (error) {
       alert("Error with these possible reasons: \n1. Screening not found \n2. No available seats \n3. Screening has already started \n4. Please select a seat \n5. Seat already taken \n6. User already has a ticket for this screening")
+      console.log(error)
     }
   }
 

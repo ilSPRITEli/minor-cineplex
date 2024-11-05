@@ -50,6 +50,11 @@ export default function TicketsTabs() {
     }
   }, [session]);
 
+  if (status === 'loading') {
+    return <div>Loading...</div>;
+  }
+
+
 
   return (
     <div className="min-h-screen bg-transparent text-white">
